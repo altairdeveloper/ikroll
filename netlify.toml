@@ -1,0 +1,14 @@
+# Netlify deployment config for this TanStack Start (SSR) app.
+# The build runs Nitro with the `netlify` preset, which emits:
+#   - static assets  -> dist/            (published below)
+#   - the SSR handler -> .netlify/functions-internal/server/  (auto-wired by Netlify)
+# The server function declares `path: "/*"` with `preferStatic: true`, so static
+# files are served directly and everything else is server-rendered.
+
+[build]
+  command = "bun run build"
+  publish = "dist"
+
+[build.environment]
+  # Force the Netlify Nitro preset (the project defaults to cloudflare-module).
+  NITRO_PRESET = "netlify"
