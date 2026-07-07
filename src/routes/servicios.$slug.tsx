@@ -1,19 +1,23 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { services } from "@/lib/site-data";
 import { PageHero } from "./servicios.index";
 
-import type { Service } from "@/lib/site-data";
-
 export const Route = createFileRoute("/servicios/$slug")({
-  loader: ({ params }): { service: Service } => {
+  // Return only the serializable slug — the Service object carries a Lucide
+  // `icon` (a function component) that can't be serialized into the SSR
+  // hydration payload, which crashes the router with "Invariant failed".
+  // The full service is looked up from the static `services` array (available
+  // on both server and client) wherever it's needed.
+  loader: ({ params }): { slug: string } => {
     const service = services.find((s) => s.slug === params.slug);
     if (!service) throw notFound();
-    return { service };
+    return { slug: service.slug };
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const { service } = loaderData;
+    const service = services.find((s) => s.slug === loaderData.slug);
+    if (!service) return {};
     return {
       meta: [
         { title: `${service.name} | IKROL` },
@@ -35,7 +39,8 @@ export const Route = createFileRoute("/servicios/$slug")({
 });
 
 function ServiceDetail() {
-  const { service } = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
+  const service = services.find((s) => s.slug === slug)!;
   const Icon = service.icon;
   const others = services.filter((s) => s.slug !== service.slug).slice(0, 3);
 
