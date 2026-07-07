@@ -53,7 +53,7 @@ function ServiceDetail() {
               <h2 className="text-2xl md:text-3xl font-bold">Qué incluye este servicio</h2>
             </div>
             <ul className="space-y-4">
-              {service.features.map((f) => (
+              {service.features.map((f: string) => (
                 <li key={f} className="flex gap-4 p-5 rounded-xl bg-secondary/50 border">
                   <div className="h-6 w-6 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style={{ background: "var(--brand)" }}>
                     <Check className="h-4 w-4 text-white" strokeWidth={3} />
@@ -65,7 +65,7 @@ function ServiceDetail() {
 
             <h2 className="mt-16 text-2xl md:text-3xl font-bold">Beneficios para tu operación</h2>
             <div className="mt-8 grid sm:grid-cols-3 gap-6">
-              {service.benefits.map((b) => (
+              {service.benefits.map((b: { title: string; description: string }) => (
                 <div key={b.title} className="p-6 rounded-xl border bg-card">
                   <div className="h-2 w-10 rounded-full mb-4" style={{ background: "var(--brand)" }} />
                   <h3 className="font-bold">{b.title}</h3>
