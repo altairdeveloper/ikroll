@@ -28,50 +28,45 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-brand: var(--brand);
-  --color-brand-foreground: var(--brand-foreground);
-  --color-navy: var(--navy);
-  --color-navy-foreground: var(--navy-foreground);
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Ocean Deep palette — locked */
+  --color-ink: #0c2340;         /* deep navy */
+  --color-surface: #1a4a6e;     /* mid navy */
+  --color-tide: #2d8a9e;        /* teal */
+  --color-brand: #5cbdb9;       /* light teal accent */
+  --color-brand-foreground: #0c2340;
+  --color-navy: #0c2340;
+  --color-navy-foreground: #f5f7fa;
+  --color-paper: #f5f3ee;
+
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 1rem;
 
-  /* Brand tokens from IKROL logo */
-  --navy: oklch(0.19 0.04 240);
-  --navy-foreground: oklch(0.98 0 0);
-  --brand: oklch(0.74 0.14 170);           /* teal/green */
-  --brand-foreground: oklch(0.15 0.03 240);
-  --brand-deep: oklch(0.55 0.13 175);
-
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.15 0.03 240);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.03 240);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.03 240);
-  --primary: var(--navy);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0.005 240);
-  --secondary-foreground: var(--navy);
-  --muted: oklch(0.96 0.005 240);
-  --muted-foreground: oklch(0.45 0.02 240);
-  --accent: oklch(0.94 0.05 170);
-  --accent-foreground: var(--navy);
+  /* Dark editorial base */
+  --background: #0c2340;
+  --foreground: #eef2f6;
+  --card: #123054;
+  --card-foreground: #eef2f6;
+  --popover: #0c2340;
+  --popover-foreground: #eef2f6;
+  --primary: #5cbdb9;
+  --primary-foreground: #0c2340;
+  --secondary: #123054;
+  --secondary-foreground: #eef2f6;
+  --muted: #16345a;
+  --muted-foreground: #9db1c7;
+  --accent: #2d8a9e;
+  --accent-foreground: #0c2340;
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.9 0.01 240);
-  --input: oklch(0.9 0.01 240);
-  --ring: var(--brand);
-
-  --gradient-hero: linear-gradient(135deg, oklch(0.19 0.04 240 / 0.85) 0%, oklch(0.19 0.04 240 / 0.55) 50%, oklch(0.19 0.04 240 / 0.85) 100%);
-  --gradient-brand: linear-gradient(135deg, var(--brand) 0%, var(--brand-deep) 100%);
-  --gradient-navy: linear-gradient(135deg, oklch(0.14 0.04 240) 0%, oklch(0.22 0.05 235) 100%);
-  --shadow-soft: 0 1px 2px oklch(0.15 0.03 240 / 0.04), 0 8px 24px -8px oklch(0.15 0.03 240 / 0.12);
-  --shadow-brand: 0 12px 40px -12px oklch(0.55 0.13 175 / 0.45);
-  --shadow-card: 0 2px 8px oklch(0.15 0.03 240 / 0.06), 0 20px 48px -24px oklch(0.15 0.03 240 / 0.18);
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #5cbdb9;
 }
 
 @layer base {
@@ -80,26 +75,58 @@
   }
   html {
     scroll-behavior: smooth;
+    background: #0c2340;
   }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    line-height: 0.95;
+  }
+  ::selection {
+    background: #5cbdb9;
+    color: #0c2340;
   }
 }
 
 @utility container-page {
-  max-width: 80rem;
+  max-width: 84rem;
   margin-inline: auto;
   padding-inline: 1.25rem;
 }
 @media (min-width: 768px) {
-  .container-page { padding-inline: 2rem; }
+  .container-page { padding-inline: 2.5rem; }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #5cbdb9;
+}
+
+@utility meta-mono {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(238, 242, 246, 0.5);
+}
+
+@utility hairline {
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 @utility btn-brand {
@@ -107,54 +134,57 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
   font-weight: 600;
-  background: var(--gradient-brand);
-  color: var(--brand-foreground);
-  box-shadow: var(--shadow-brand);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+  background: #5cbdb9;
+  color: #0c2340;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
   &:hover {
-    transform: translateY(-2px);
+    background: #ffffff;
+    transform: translateY(-1px);
   }
 }
 
-@utility btn-outline-light {
+@utility btn-ghost-light {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  border: 1px solid oklch(1 0 0 / 0.3);
-  color: oklch(0.98 0 0);
-  backdrop-filter: blur(8px);
-  background: oklch(1 0 0 / 0.05);
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #eef2f6;
+  background: transparent;
   transition: all 0.2s ease;
   &:hover {
-    background: oklch(1 0 0 / 0.12);
-    border-color: var(--brand);
+    border-color: #5cbdb9;
+    color: #5cbdb9;
   }
 }
 
-@utility card-elevated {
-  background: var(--card);
-  border-radius: 1rem;
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--border);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+@utility bento-tile {
+  position: relative;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(26, 74, 110, 0.35);
+  overflow: hidden;
+  transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px -20px oklch(0.15 0.03 240 / 0.25);
+    border-color: rgba(92, 189, 185, 0.4);
   }
 }
 
 @utility section-py {
-  padding-block: 4rem;
+  padding-block: 5rem;
 }
 @media (min-width: 768px) {
-  .section-py { padding-block: 6rem; }
+  .section-py { padding-block: 8rem; }
 }
 
 @keyframes fade-up {
@@ -162,5 +192,13 @@
   to { opacity: 1; transform: translateY(0); }
 }
 @utility animate-fade-up {
-  animation: fade-up 0.7s ease-out both;
+  animation: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@utility animate-marquee {
+  animation: marquee 40s linear infinite;
 }

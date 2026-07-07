@@ -21,30 +21,34 @@ const estados = [
 
 function Coverage() {
   const blocks = [
-    { icon: Anchor, title: "Puertos", items: coverage.puertos, color: "var(--brand)" },
-    { icon: Building2, title: "Fronteras", items: coverage.fronteras, color: "var(--brand-deep)" },
-    { icon: Plane, title: "Aeropuertos", items: coverage.aeropuertos, color: "var(--brand)" },
+    { icon: Anchor, tag: "01", title: "Puertos", items: coverage.puertos },
+    { icon: Building2, tag: "02", title: "Fronteras", items: coverage.fronteras },
+    { icon: Plane, tag: "03", title: "Aeropuertos", items: coverage.aeropuertos },
   ];
   return (
     <>
       <PageHero
         eyebrow="Cobertura"
-        title="Presencia estratégica en México y el mundo"
+        title={<>Presencia estratégica <span className="italic text-[#5cbdb9]">en México y el mundo.</span></>}
         subtitle="Operamos desde los principales puertos, fronteras y aeropuertos, con presencia en los 32 estados de la República."
       />
 
       <section className="section-py container-page">
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-5">
           {blocks.map((b) => (
-            <div key={b.title} className="rounded-2xl p-8 border bg-card shadow-sm">
-              <div className="h-14 w-14 rounded-xl flex items-center justify-center mb-6" style={{ background: b.color }}>
-                <b.icon className="h-7 w-7 text-white" />
+            <div key={b.title} className="bento-tile p-8 min-h-[380px] flex flex-col">
+              <div className="flex items-center justify-between">
+                <div className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center">
+                  <b.icon className="h-5 w-5 text-[#5cbdb9]" strokeWidth={1.5} />
+                </div>
+                <span className="meta-mono">{b.tag}</span>
               </div>
-              <h3 className="text-xl font-bold">{b.title}</h3>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+              <h3 className="mt-8 font-display text-4xl italic text-white">{b.title}</h3>
+              <div className="hairline my-6" />
+              <ul className="space-y-3 text-white/70">
                 {b.items.map((i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <MapPin className="h-3.5 w-3.5" style={{ color: "var(--brand-deep)" }} /> {i}
+                  <li key={i} className="flex items-center gap-3 font-light">
+                    <MapPin className="h-3.5 w-3.5 text-[#5cbdb9] shrink-0" /> {i}
                   </li>
                 ))}
               </ul>
@@ -52,12 +56,18 @@ function Coverage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl p-10 border bg-secondary/40">
-          <h3 className="text-2xl font-bold">Cobertura de transporte terrestre</h3>
-          <p className="mt-2 text-muted-foreground">Servicio en los 32 estados de la República Mexicana.</p>
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+        <div className="mt-16 bento-tile p-10 md:p-14">
+          <div className="flex items-baseline justify-between flex-wrap gap-4">
+            <div>
+              <span className="eyebrow">Terrestre</span>
+              <h3 className="mt-3 font-display text-4xl md:text-5xl text-white italic">32 estados de la República.</h3>
+            </div>
+            <span className="meta-mono">Servicio nacional</span>
+          </div>
+          <div className="hairline mt-8 mb-8" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-3">
             {estados.map((e) => (
-              <div key={e} className="px-4 py-2 rounded-lg bg-card border text-sm text-foreground/80 hover:border-brand hover:text-foreground transition-colors">
+              <div key={e} className="text-sm text-white/70 font-light border-b border-white/5 pb-2 hover:text-[#5cbdb9] transition-colors">
                 {e}
               </div>
             ))}
@@ -67,3 +77,4 @@ function Coverage() {
     </>
   );
 }
+

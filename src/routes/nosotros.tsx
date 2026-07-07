@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Target, Eye, Sparkles } from "lucide-react";
-import { values, heroImage } from "@/lib/site-data";
+import { values, heroImage, maritimoImage } from "@/lib/site-data";
 import { PageHero } from "./servicios.index";
 
 export const Route = createFileRoute("/nosotros")({
@@ -20,67 +19,73 @@ function About() {
   return (
     <>
       <PageHero
-        eyebrow="Nosotros"
-        title="Impulsamos negocios que mueven al mundo"
-        subtitle="Somos una empresa mexicana con más de 20 años acompañando a importadores y exportadores en su expansión internacional."
+        eyebrow="La firma"
+        title={<>Operadores, <span className="italic text-[#5cbdb9]">no intermediarios.</span></>}
+        subtitle="Somos una casa mexicana con más de dos décadas moviendo el comercio exterior de importadores y exportadores. Cada embarque, un ejecutivo dedicado."
       />
 
+      {/* Manifesto split */}
       <section className="section-py container-page">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="relative">
-            <img src={heroImage} alt="Equipo IKROL" className="rounded-2xl shadow-xl w-full aspect-[4/5] object-cover" />
-            <div className="absolute -bottom-8 -right-8 bg-card rounded-2xl shadow-2xl p-6 border">
-              <div className="text-5xl font-bold" style={{ color: "var(--brand-deep)" }}>20+</div>
-              <div className="text-sm text-muted-foreground mt-1">años de experiencia<br />en logística</div>
+        <div className="grid md:grid-cols-12 gap-10 md:gap-16">
+          <div className="md:col-span-5 relative">
+            <div className="bento-tile overflow-hidden aspect-[4/5]">
+              <img src={maritimoImage} alt="Operación IKROL" className="h-full w-full object-cover grayscale" />
+            </div>
+            <div className="absolute -bottom-6 -right-6 bento-tile p-6 bg-[#5cbdb9] border-none text-[#0c2340]">
+              <div className="font-display text-6xl leading-none">20+</div>
+              <div className="meta-mono mt-2 text-[#0c2340] opacity-80">Años en operación</div>
             </div>
           </div>
-          <div>
-            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--brand-deep)" }}>Nuestra historia</span>
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold leading-tight">Especialistas en logística multimodal y comercio exterior</h2>
-            <p className="mt-6 text-muted-foreground leading-relaxed">
-              Somos una empresa mexicana con más de <strong className="text-foreground">20 años de experiencia</strong> en el mercado logístico, brindando servicios personalizados de acuerdo a las necesidades de las empresas importadoras y exportadoras del país.
+          <div className="md:col-span-7">
+            <span className="eyebrow">Nuestra historia</span>
+            <h2 className="mt-6 font-display text-white text-4xl md:text-6xl leading-[0.95]">
+              Especialistas en <span className="italic text-[#5cbdb9]">logística multimodal</span> y comercio exterior.
+            </h2>
+            <div className="hairline my-10" />
+            <p className="text-lg text-white/70 font-light leading-relaxed">
+              Empresa mexicana con más de <span className="text-white">20 años de experiencia</span> en el mercado logístico, diseñando servicios personalizados para las necesidades de importadores y exportadores del país.
             </p>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              Proporcionamos soluciones integrales en logística, asesoría y asistencia en comercio exterior, con presencia en los principales puertos, fronteras y aeropuertos del país. Nuestro equipo te acompaña en cada paso de tu operación internacional.
+            <p className="mt-6 text-white/70 font-light leading-relaxed">
+              Proporcionamos soluciones integrales en logística, asesoría y asistencia en comercio exterior, con presencia en los principales puertos, fronteras y aeropuertos de México.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="section-py bg-secondary/50">
-        <div className="container-page">
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              { icon: Target, title: "Misión", body: "Generar valor a nuestros clientes optimizando su cadena de suministro mediante servicios de logística multimodal e internacional." },
-              { icon: Eye, title: "Visión", body: "Ser una empresa innovadora y líder en el sector logístico que contribuya al crecimiento y desarrollo de cada uno de nuestros clientes." },
-            ].map((b) => (
-              <div key={b.title} className="p-10 rounded-2xl bg-card border shadow-sm">
-                <div className="h-14 w-14 rounded-xl flex items-center justify-center mb-6" style={{ background: "var(--gradient-brand)" }}>
-                  <b.icon className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold">{b.title}</h3>
-                <p className="mt-4 text-muted-foreground leading-relaxed">{b.body}</p>
+      {/* Mission / Vision */}
+      <section className="section-py border-t border-white/5">
+        <div className="container-page grid md:grid-cols-2 gap-5">
+          {[
+            { tag: "Misión", body: "Generar valor a nuestros clientes optimizando su cadena de suministro mediante servicios de logística multimodal e internacional." },
+            { tag: "Visión", body: "Ser una empresa innovadora y líder en el sector logístico que contribuya al crecimiento y desarrollo de cada uno de nuestros clientes." },
+          ].map((b) => (
+            <div key={b.tag} className="bento-tile p-10 md:p-14 min-h-[340px] flex flex-col justify-between">
+              <span className="meta-mono">{b.tag}</span>
+              <p className="font-display text-3xl md:text-4xl italic text-white leading-tight">
+                {b.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Values — editorial list */}
+      <section className="section-py container-page border-t border-white/5">
+        <div className="grid md:grid-cols-12 gap-10">
+          <div className="md:col-span-4">
+            <span className="eyebrow">Valores</span>
+            <h2 className="mt-6 font-display text-white text-5xl md:text-6xl leading-[0.95]">
+              Los principios<br /><span className="italic">que nos definen.</span>
+            </h2>
+          </div>
+          <div className="md:col-span-8 border-t border-white/10">
+            {values.map((v, i) => (
+              <div key={v.title} className="grid grid-cols-[60px_minmax(0,1fr)_minmax(0,2fr)] items-baseline gap-6 py-6 border-b border-white/10">
+                <span className="meta-mono">0{i + 1}</span>
+                <h3 className="font-display text-3xl md:text-4xl italic text-white">{v.title}</h3>
+                <p className="text-sm md:text-base text-white/60 font-light">{v.description}</p>
               </div>
             ))}
-          </div>
-
-          <div className="mt-16">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="inline-flex items-center gap-2 text-brand" style={{ color: "var(--brand-deep)" }}>
-                <Sparkles className="h-5 w-5" />
-                <span className="text-xs font-bold uppercase tracking-widest">Valores</span>
-              </div>
-              <h3 className="mt-3 text-3xl md:text-4xl font-bold">Los principios que nos definen</h3>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
-              {values.map((v, i) => (
-                <div key={v.title} className="p-6 rounded-xl bg-card border text-center">
-                  <div className="text-3xl font-bold mb-2" style={{ color: "var(--brand-deep)" }}>0{i + 1}</div>
-                  <div className="font-bold">{v.title}</div>
-                  <p className="mt-2 text-xs text-muted-foreground">{v.description}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

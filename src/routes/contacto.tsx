@@ -54,46 +54,47 @@ function Contact() {
     <>
       <PageHero
         eyebrow="Contacto"
-        title="Estamos listos para impulsar tu negocio"
-        subtitle="Cuéntanos en qué servicio estás interesado y pronto nos pondremos en contacto contigo."
+        title={<>Un embarque. <span className="italic text-[#5cbdb9]">Un ejecutivo dedicado.</span></>}
+        subtitle="Cuéntanos qué mueves. Un especialista de IKROL responderá con una propuesta técnica en menos de 24 horas."
       />
 
       <section className="section-py container-page">
-        <div className="grid lg:grid-cols-5 gap-10">
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid lg:grid-cols-12 gap-6">
+          <div className="lg:col-span-5 space-y-4">
             {[
               { icon: Phone, label: "Teléfono", value: contactInfo.phone, href: `tel:${contactInfo.phone.replace(/\s/g,"")}` },
-              { icon: Mail, label: "Email", value: contactInfo.email, href: `mailto:${contactInfo.email}` },
+              { icon: Mail, label: "Correo", value: contactInfo.email, href: `mailto:${contactInfo.email}` },
               { icon: MessageCircle, label: "WhatsApp", value: "Chatea con un asesor", href: `https://wa.me/${contactInfo.whatsapp}` },
               { icon: MapPin, label: "Ubicación", value: contactInfo.address },
-            ].map((c) => (
-              <a key={c.label} href={c.href} className={`block p-6 rounded-2xl border bg-card ${c.href ? "hover:border-brand transition-colors" : ""}`}>
-                <div className="flex items-start gap-4">
-                  <div className="h-11 w-11 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "var(--gradient-brand)" }}>
-                    <c.icon className="h-5 w-5 text-white" />
+            ].map((c, i) => (
+              <a key={c.label} href={c.href} className="bento-tile block p-6 group">
+                <div className="flex items-start gap-5">
+                  <span className="meta-mono w-6 shrink-0 pt-2">0{i + 1}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="meta-mono">{c.label}</div>
+                    <div className="mt-2 font-display italic text-2xl text-white group-hover:text-[#5cbdb9] transition-colors truncate">{c.value}</div>
                   </div>
-                  <div>
-                    <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">{c.label}</div>
-                    <div className="mt-1 font-semibold">{c.value}</div>
-                  </div>
+                  <c.icon className="h-5 w-5 text-[#5cbdb9] shrink-0 mt-2" strokeWidth={1.5} />
                 </div>
               </a>
             ))}
           </div>
 
-          <div className="lg:col-span-3">
-            <div className="rounded-2xl border bg-card p-8 md:p-10 shadow-sm">
+          <div className="lg:col-span-7">
+            <div className="bento-tile p-8 md:p-12">
               {sent ? (
-                <div className="text-center py-12">
-                  <div className="mx-auto h-16 w-16 rounded-full flex items-center justify-center" style={{ background: "var(--brand)" }}>
-                    <CheckCircle2 className="h-8 w-8 text-white" />
+                <div className="text-center py-16">
+                  <div className="mx-auto h-16 w-16 rounded-full flex items-center justify-center bg-[#5cbdb9]">
+                    <CheckCircle2 className="h-8 w-8 text-[#0c2340]" />
                   </div>
-                  <h3 className="mt-6 text-2xl font-bold">¡Gracias por contactarnos!</h3>
-                  <p className="mt-2 text-muted-foreground">Te redirigimos a WhatsApp para completar tu solicitud. Un especialista responderá en breve.</p>
-                  <button onClick={() => setSent(false)} className="btn-brand mt-6">Enviar otro mensaje</button>
+                  <h3 className="mt-8 font-display text-4xl italic text-white">¡Gracias por escribirnos!</h3>
+                  <p className="mt-3 text-white/60 font-light">Te redirigimos a WhatsApp para completar la solicitud. Un especialista te responderá en breve.</p>
+                  <button onClick={() => setSent(false)} className="btn-brand mt-8">Enviar otro mensaje</button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                <form onSubmit={handleSubmit} noValidate className="space-y-6">
+                  <span className="eyebrow">Formulario</span>
+                  <div className="hairline" />
                   <div className="grid sm:grid-cols-2 gap-5">
                     <Field label="Nombre" name="nombre" error={errors.nombre} required />
                     <Field label="Apellido" name="apellido" error={errors.apellido} required />
@@ -104,22 +105,22 @@ function Contact() {
                   </div>
                   <Field label="Empresa" name="empresa" error={errors.empresa} />
                   <div>
-                    <label className="text-sm font-medium">Servicio de interés</label>
-                    <select name="servicio" className="mt-2 w-full h-11 px-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-brand">
-                      <option value="">Selecciona un servicio</option>
-                      {services.map((s) => <option key={s.slug} value={s.name}>{s.name}</option>)}
-                      <option value="Otro">Otro</option>
+                    <label className="meta-mono block mb-2">Servicio de interés</label>
+                    <select name="servicio" className="w-full h-12 px-3 rounded-none bg-transparent border-b border-white/20 text-white focus:outline-none focus:border-[#5cbdb9] font-light">
+                      <option value="" className="bg-[#0c2340]">Selecciona un servicio</option>
+                      {services.map((s) => <option key={s.slug} value={s.name} className="bg-[#0c2340]">{s.name}</option>)}
+                      <option value="Otro" className="bg-[#0c2340]">Otro</option>
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-medium">Descripción del servicio *</label>
-                    <textarea name="mensaje" rows={5} required className="mt-2 w-full px-3 py-2 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-brand" placeholder="Cuéntanos sobre tu embarque, origen, destino, tipo de carga..." />
+                    <label className="meta-mono block mb-2">Descripción *</label>
+                    <textarea name="mensaje" rows={4} required className="w-full px-0 py-2 bg-transparent border-b border-white/20 text-white focus:outline-none focus:border-[#5cbdb9] font-light resize-none" placeholder="Origen, destino, tipo de carga..." />
                     {errors.mensaje && <p className="mt-1 text-xs text-destructive">{errors.mensaje}</p>}
                   </div>
-                  <button type="submit" className="btn-brand w-full">
+                  <button type="submit" className="btn-brand w-full mt-4">
                     Enviar solicitud <Send className="h-4 w-4" />
                   </button>
-                  <p className="text-xs text-muted-foreground text-center">
+                  <p className="text-xs text-white/40 text-center font-light">
                     Al enviar aceptas ser contactado por un asesor de IKROL.
                   </p>
                 </form>
@@ -135,14 +136,15 @@ function Contact() {
 function Field({ label, name, type = "text", error, required }: { label: string; name: string; type?: string; error?: string; required?: boolean }) {
   return (
     <div>
-      <label className="text-sm font-medium">{label} {required && "*"}</label>
+      <label className="meta-mono block mb-2">{label} {required && "*"}</label>
       <input
         name={name}
         type={type}
         required={required}
-        className="mt-2 w-full h-11 px-3 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-brand"
+        className="w-full h-12 px-0 bg-transparent border-b border-white/20 text-white focus:outline-none focus:border-[#5cbdb9] font-light"
       />
       {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
     </div>
   );
 }
+
