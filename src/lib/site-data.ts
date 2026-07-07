@@ -23,15 +23,14 @@ export type Service = {
   benefits: { title: string; description: string }[];
 };
 
-import maritimoAsset from "@/assets/maritimo.jpg.asset.json";
-import aereoAsset from "@/assets/aereo.jpg.asset.json";
-import terrestreAsset from "@/assets/terrestre.jpg.asset.json";
-import homeAsset from "@/assets/home.jpg.asset.json";
-
-export const heroImage = homeAsset.url;
-export const maritimoImage = maritimoAsset.url;
-export const aereoImage = aereoAsset.url;
-export const terrestreImage = terrestreAsset.url;
+// Images live in /public and are served from the site root, so they work in any
+// deploy target (Netlify, etc.). The previous `/__l5e/assets-v1/...` asset URLs
+// only resolved inside the Lovable preview proxy and 404'd in production.
+export const heroImage = "/hero.png";
+export const maritimoImage = "/ship.png";
+export const aereoImage = "/flight.png";
+export const terrestreImage = "/truck.png";
+export const sobredimensionadaImage = "/carriage.png";
 
 export const services: Service[] = [
   {
@@ -39,7 +38,7 @@ export const services: Service[] = [
     name: "Flete Marítimo",
     short: "Cobertura mundial en carga FCL, LCL y proyectos especiales.",
     icon: Ship,
-    hero: maritimoAsset.url,
+    hero: maritimoImage,
     intro:
       "Movemos tu carga por los principales puertos del mundo con tarifas competitivas, tiempos de tránsito confiables y trazabilidad total.",
     features: [
@@ -60,7 +59,7 @@ export const services: Service[] = [
     name: "Flete Aéreo",
     short: "Soluciones aéreas para carga urgente, perecedera y de alto valor.",
     icon: Plane,
-    hero: aereoAsset.url,
+    hero: aereoImage,
     intro:
       "Cuando el tiempo es crítico, garantizamos rapidez, seguridad y visibilidad en cada envío aéreo internacional o doméstico.",
     features: [
@@ -81,7 +80,7 @@ export const services: Service[] = [
     name: "Transporte Terrestre",
     short: "Autotransporte de carga nacional, cross-border y última milla.",
     icon: Truck,
-    hero: terrestreAsset.url,
+    hero: terrestreImage,
     intro:
       "Red propia y aliada de unidades para movimientos nacionales, fronterizos y de distribución con seguimiento GPS 24/7.",
     features: [
@@ -102,7 +101,7 @@ export const services: Service[] = [
     name: "Carga Sobredimensionada",
     short: "Proyectos especiales, maquinaria y carga fuera de norma.",
     icon: Package,
-    hero: maritimoAsset.url,
+    hero: sobredimensionadaImage,
     intro:
       "Diseñamos soluciones a la medida para maquinaria pesada, equipos industriales y carga con dimensiones fuera de estándar.",
     features: [
@@ -123,7 +122,7 @@ export const services: Service[] = [
     name: "Despacho Aduanal",
     short: "Asesoría y trámite integral en importación y exportación.",
     icon: FileCheck2,
-    hero: aereoAsset.url,
+    hero: aereoImage,
     intro:
       "Trabajamos con agentes aduanales certificados en las principales aduanas del país para agilizar tus operaciones de comercio exterior.",
     features: [
@@ -144,7 +143,7 @@ export const services: Service[] = [
     name: "Seguro de Mercancías",
     short: "Cobertura integral para tu carga en cualquier modalidad.",
     icon: ShieldCheck,
-    hero: terrestreAsset.url,
+    hero: terrestreImage,
     intro:
       "Protege el valor de tus mercancías durante todo el trayecto con pólizas específicas por embarque o anuales.",
     features: [
