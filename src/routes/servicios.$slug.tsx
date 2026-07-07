@@ -3,8 +3,10 @@ import { ArrowRight, Check } from "lucide-react";
 import { services } from "@/lib/site-data";
 import { PageHero } from "./servicios.index";
 
+import type { Service } from "@/lib/site-data";
+
 export const Route = createFileRoute("/servicios/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { service: Service } => {
     const service = services.find((s) => s.slug === params.slug);
     if (!service) throw notFound();
     return { service };
