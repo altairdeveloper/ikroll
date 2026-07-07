@@ -1,8 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Menu, X, Phone } from "lucide-react";
-import logoAsset from "@/assets/logo.png.asset.json";
-import { navLinks, contactInfo } from "@/lib/site-data";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { navLinks } from "@/lib/site-data";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -21,12 +20,15 @@ export function SiteHeader() {
   return (
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        scrolled ? "bg-background/90 backdrop-blur border-b shadow-sm" : "bg-background/60 backdrop-blur-sm"
+        scrolled
+          ? "bg-[#0c2340]/85 backdrop-blur-xl border-b border-white/5"
+          : "bg-transparent"
       }`}
     >
-      <div className="container-page flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logoAsset.url} alt="IKROL — Creando conexiones globales" className="h-11 w-auto" />
+      <div className="container-page flex h-20 items-center justify-between gap-6">
+        <Link to="/" className="flex items-baseline gap-2 shrink-0">
+          <span className="font-display text-3xl italic tracking-tighter text-white">IKROL</span>
+          <span className="hidden sm:inline meta-mono">MX</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
@@ -34,8 +36,8 @@ export function SiteHeader() {
             <Link
               key={l.to}
               to={l.to}
-              className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground rounded-md transition-colors relative"
-              activeProps={{ className: "px-4 py-2 text-sm font-semibold text-foreground rounded-md relative after:absolute after:bottom-1 after:left-4 after:right-4 after:h-0.5 after:bg-brand" }}
+              className="px-4 py-2 text-sm font-medium text-white/60 hover:text-white transition-colors relative"
+              activeProps={{ className: "px-4 py-2 text-sm font-medium text-white relative after:absolute after:bottom-0 after:left-4 after:right-4 after:h-px after:bg-[#5cbdb9]" }}
               activeOptions={{ exact: l.to === "/" }}
             >
               {l.label}
@@ -43,15 +45,14 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground">
-            <Phone className="h-4 w-4" /> {contactInfo.phone}
-          </a>
-          <Link to="/contacto" className="btn-brand !py-2 !px-4 text-sm">Cotizar</Link>
+        <div className="hidden lg:flex items-center gap-4">
+          <Link to="/contacto" className="btn-brand !py-2.5 !px-5 text-sm">
+            Cotizar <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
 
         <button
-          className="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-md border"
+          className="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-white/15 text-white"
           onClick={() => setOpen((v) => !v)}
           aria-label="Menú"
         >
@@ -60,14 +61,14 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t bg-background">
-          <nav className="container-page flex flex-col py-4 gap-1">
+        <div className="lg:hidden border-t border-white/10 bg-[#0c2340]">
+          <nav className="container-page flex flex-col py-6 gap-1">
             {navLinks.map((l) => (
-              <Link key={l.to} to={l.to} className="px-3 py-3 rounded-md hover:bg-secondary font-medium">
+              <Link key={l.to} to={l.to} className="px-3 py-4 font-display italic text-3xl text-white border-b border-white/5">
                 {l.label}
               </Link>
             ))}
-            <Link to="/contacto" className="btn-brand mt-2">Cotizar</Link>
+            <Link to="/contacto" className="btn-brand mt-4">Cotizar</Link>
           </nav>
         </div>
       )}
