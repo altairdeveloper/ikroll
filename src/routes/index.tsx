@@ -120,130 +120,10 @@ function HeroCarousel() {
 }
 
 function HomePage() {
-  const [maritimo, aereo, terrestre, sobredim, aduanal, seguros] = services;
-
   return (
     <>
       {/* ─────────── HERO ─────────── */}
       <HeroCarousel />
-
-      {/* ─────────── SOLUCIONES ─────────── */}
-      <section className="container-page section-py">
-        <div className="flex items-end justify-between gap-8 mb-10 md:mb-14">
-          <div>
-            <span className="eyebrow">Nuestras soluciones</span>
-            <h2 className="mt-4 font-display text-4xl md:text-6xl text-white leading-[0.95]">
-              Operamos sin fronteras<br /><span className="italic text-[#5cbdb9]">para impulsar tu negocio.</span>
-            </h2>
-          </div>
-          <Link to="/servicios" className="hidden md:inline-flex btn-ghost-light">
-            Ver todos <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 auto-rows-[minmax(180px,auto)]">
-
-          {/* MARITIMO */}
-          <ServiceTile
-            slug={maritimo.slug}
-            name={maritimo.name}
-            desc="Contenedor completo, LCL y carga refrigerada por los principales puertos del mundo."
-            index="01"
-            icon={Ship}
-            tone="tide-soft"
-          />
-
-          {/* AEREO */}
-          <ServiceTile
-            slug={aereo.slug}
-            name={aereo.name}
-            desc="Salidas frecuentes para carga urgente, perecedera y de alto valor."
-            index="02"
-            icon={Plane}
-            tone="ink"
-          />
-
-          {/* GROUND — image tile */}
-          <Link to="/servicios/$slug" params={{ slug: terrestre.slug }} className="md:col-span-4 bento-tile min-h-[280px] group relative overflow-hidden">
-            <img src={terrestreImage} alt="Transporte terrestre IKROL" className="absolute inset-0 h-full w-full object-cover grayscale opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0c2340] via-[#0c2340]/70 to-transparent" />
-            <div className="relative z-10 p-8 h-full flex flex-col justify-between">
-              <div className="flex items-center justify-between">
-                <span className="meta-mono">03 / Ground Fleet</span>
-                <div className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center">
-                  <Truck className="h-4 w-4 text-white" strokeWidth={1.5} />
-                </div>
-              </div>
-              <div>
-                <h3 className="font-display text-3xl md:text-4xl italic text-white leading-[0.95]">Transporte terrestre</h3>
-                <p className="text-sm text-white/70 mt-2 max-w-xs">Cross-border MX · US · CA con seguimiento GPS 24/7 en los 32 estados.</p>
-              </div>
-            </div>
-          </Link>
-
-          {/* ADUANAL — brand tile */}
-          <Link to="/servicios/$slug" params={{ slug: aduanal.slug }} className="md:col-span-4 bento-tile p-8 min-h-[280px] flex flex-col justify-between text-[#0c2340] group" style={{ background: "#5cbdb9", borderColor: "transparent" }}>
-            <div className="flex items-center justify-between">
-              <p className="text-[10px] uppercase tracking-[0.22em] font-semibold">Cobertura Total</p>
-              <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-            </div>
-            <div>
-              <h3 className="font-display text-4xl md:text-5xl leading-[0.95]">
-                Despacho aduanal<br /><span className="italic">& seguros.</span>
-              </h3>
-              <div className="mt-6 flex -space-x-2">
-                {[0.15, 0.28, 0.42, 0.56].map((o, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-[#5cbdb9]" style={{ background: `rgba(12,35,64,${o})` }} />
-                ))}
-              </div>
-            </div>
-          </Link>
-
-          {/* SOBREDIMENSIONADA — stats tile */}
-          <div className="md:col-span-4 bento-tile min-h-[280px] p-8 flex flex-col justify-between text-[#0c2340]" style={{ background: "#f5f3ee" }}>
-            <div className="flex items-start justify-between">
-              <span className="meta-mono" style={{ color: "#0c2340", opacity: 0.5 }}>04 / Project Cargo</span>
-              <Link to="/servicios/$slug" params={{ slug: sobredim.slug }} className="opacity-60 hover:opacity-100 transition-opacity">
-                <ArrowUpRight className="h-5 w-5" />
-              </Link>
-            </div>
-            <h3 className="font-display text-4xl md:text-5xl leading-[0.95] italic">
-              Carga sobre-<br />dimensionada
-            </h3>
-            <div className="flex items-center gap-6">
-              <div>
-                <p className="font-display text-3xl">32</p>
-                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Estados MX</p>
-              </div>
-              <div className="h-8 w-px bg-[#0c2340]/15" />
-              <div>
-                <p className="font-display text-3xl">24/7</p>
-                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Monitoreo</p>
-              </div>
-              <div className="h-8 w-px bg-[#0c2340]/15" />
-              <div>
-                <p className="font-display text-3xl">20+</p>
-                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Años</p>
-              </div>
-            </div>
-          </div>
-
-          {/* SEGUROS */}
-          <Link to="/servicios/$slug" params={{ slug: seguros.slug }} className="md:col-span-8 bento-tile p-8 min-h-[280px] flex flex-col justify-between group hover:bg-[rgba(45,138,158,0.25)]">
-            <div className="flex justify-between items-start">
-              <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center">
-                <ShieldCheck className="h-4 w-4 text-[#5cbdb9]" strokeWidth={1.5} />
-              </div>
-              <span className="meta-mono">06</span>
-            </div>
-            <div>
-              <h3 className="font-display text-3xl md:text-4xl italic text-white group-hover:text-[#5cbdb9] transition-colors">Seguro de mercancías</h3>
-              <p className="text-sm text-white/60 mt-2 max-w-md">Pólizas ICC A · B · C con aseguradoras de primer nivel para proteger tu carga en cualquier modalidad.</p>
-            </div>
-          </Link>
-
-        </div>
-      </section>
 
       {/* ─────────── PORT / TRUST STRIP ─────────── */}
       <section className="border-y border-white/5 py-8 overflow-hidden">
@@ -397,37 +277,5 @@ function HomePage() {
         </div>
       </section>
     </>
-  );
-}
-
-/* ─────────── Sub-components ─────────── */
-
-function ServiceTile({
-  slug, name, desc, index, icon: Icon, tone,
-}: {
-  slug: string; name: string; desc: string; index: string;
-  icon: typeof Ship; tone: "ink" | "tide-soft";
-}) {
-  const bg = tone === "ink" ? "#0c2340" : "rgba(45,138,158,0.2)";
-  return (
-    <Link
-      to="/servicios/$slug"
-      params={{ slug }}
-      className="md:col-span-4 bento-tile p-8 min-h-[240px] flex flex-col justify-between group"
-      style={{ background: bg }}
-    >
-      <div className="flex justify-between items-start">
-        <div className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center">
-          <Icon className="h-4 w-4 text-white" strokeWidth={1.5} />
-        </div>
-        <span className="meta-mono">{index}</span>
-      </div>
-      <div>
-        <h3 className="font-display text-3xl md:text-4xl italic text-white group-hover:text-[#5cbdb9] transition-colors">
-          {name}
-        </h3>
-        <p className="text-sm text-white/60 mt-2 font-light max-w-sm">{desc}</p>
-      </div>
-    </Link>
   );
 }
