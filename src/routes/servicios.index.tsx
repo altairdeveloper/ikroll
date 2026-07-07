@@ -18,31 +18,34 @@ function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Servicios"
-        title="Soluciones logísticas de extremo a extremo"
-        subtitle="Un aliado estratégico que gestiona todos los eslabones de tu cadena de suministro: transporte multimodal, aduanas y aseguramiento."
+        eyebrow="Índice de servicios"
+        title={<>Seis líneas.<br /><span className="italic text-[#5cbdb9]">Una operación.</span></>}
+        subtitle="Un aliado estratégico que gestiona cada eslabón de la cadena: transporte multimodal, aduanas y aseguramiento de mercancías."
       />
 
       <section className="section-py container-page">
-        <div className="grid md:grid-cols-2 gap-8">
-          {services.map((s) => (
+        <div className="grid md:grid-cols-2 gap-5">
+          {services.map((s, i) => (
             <Link
               key={s.slug}
               to="/servicios/$slug"
               params={{ slug: s.slug }}
-              className="card-elevated group overflow-hidden flex flex-col"
+              className="bento-tile group overflow-hidden flex flex-col min-h-[420px]"
             >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <img src={s.hero} alt={s.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, oklch(0.14 0.04 240 / 0.7), transparent 60%)" }} />
-                <div className="absolute top-4 left-4 h-12 w-12 rounded-xl flex items-center justify-center" style={{ background: "var(--gradient-brand)" }}>
-                  <s.icon className="h-6 w-6 text-white" />
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img src={s.hero} alt={s.name} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0c2340] via-[#0c2340]/50 to-transparent" />
+                <span className="absolute top-5 left-6 meta-mono">0{i + 1}</span>
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-full border border-white/25 backdrop-blur flex items-center justify-center">
+                  <s.icon className="h-4 w-4 text-white" strokeWidth={1.5} />
                 </div>
               </div>
               <div className="p-8 flex flex-col flex-1">
-                <h3 className="text-2xl font-bold">{s.name}</h3>
-                <p className="mt-3 text-muted-foreground flex-1">{s.short}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: "var(--brand-deep)" }}>
+                <h3 className="font-display text-4xl md:text-5xl italic text-white leading-[0.95] group-hover:text-[#5cbdb9] transition-colors">
+                  {s.name}
+                </h3>
+                <p className="mt-4 text-white/65 flex-1 font-light">{s.short}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#5cbdb9]">
                   Ver detalle <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
@@ -54,23 +57,24 @@ function ServicesPage() {
   );
 }
 
-export function PageHero({ eyebrow, title, subtitle, image }: { eyebrow: string; title: string; subtitle?: string; image?: string }) {
+export function PageHero({ eyebrow, title, subtitle, image }: { eyebrow: string; title: React.ReactNode; subtitle?: string; image?: string }) {
   return (
-    <section className="relative isolate overflow-hidden -mt-20 pt-32 pb-20 md:pb-28">
-      {image ? (
+    <section className="relative isolate overflow-hidden pt-16 md:pt-24 pb-16 md:pb-24 border-b border-white/5">
+      {image && (
         <>
-          <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(120deg, oklch(0.14 0.04 240 / 0.9) 0%, oklch(0.14 0.04 240 / 0.65) 100%)" }} />
+          <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover grayscale opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0c2340]/70 via-[#0c2340]/85 to-[#0c2340]" />
         </>
-      ) : (
-        <div className="absolute inset-0" style={{ background: "var(--gradient-navy)" }} />
       )}
-      <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 80% 20%, var(--brand) 0%, transparent 40%)" }} />
-      <div className="container-page relative z-10 pt-16">
-        <span className="text-xs font-bold uppercase tracking-widest text-brand">{eyebrow}</span>
-        <h1 className="mt-3 text-4xl md:text-6xl font-bold text-white max-w-3xl leading-tight">{title}</h1>
-        {subtitle && <p className="mt-6 text-lg text-white/75 max-w-2xl">{subtitle}</p>}
+      <div className="pointer-events-none absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-[#5cbdb9] opacity-10 blur-[160px]" />
+      <div className="container-page relative z-10">
+        <span className="eyebrow">{eyebrow}</span>
+        <h1 className="mt-6 font-display text-white text-5xl md:text-8xl leading-[0.9] max-w-4xl tracking-tight">
+          {title}
+        </h1>
+        {subtitle && <p className="mt-8 text-lg md:text-xl text-white/70 max-w-2xl font-light leading-relaxed">{subtitle}</p>}
       </div>
     </section>
   );
 }
+
