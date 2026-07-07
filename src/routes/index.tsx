@@ -1,14 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Ship, Plane, Truck, Package, FileCheck2, ShieldCheck, Anchor, Globe2 } from "lucide-react";
-import { services, heroImage, maritimoImage, aereoImage, terrestreImage, contactInfo, coverage } from "@/lib/site-data";
+import { useState, useEffect } from "react";
+import { ArrowRight, ArrowUpRight, Ship, Plane, Truck, Package, FileCheck2, ShieldCheck, ChevronLeft, ChevronRight, Leaf, ReceiptText } from "lucide-react";
+import { services, heroImage, maritimoImage, aereoImage, terrestreImage, sobredimensionadaImage, contactInfo, coverage } from "@/lib/site-data";
+
+const heroSlides = [heroImage, maritimoImage, aereoImage, terrestreImage, sobredimensionadaImage];
 
 export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
-      { title: "IKROL — Logística internacional editorial | Marítimo, aéreo, terrestre" },
+      { title: "IKROL — Conectamos lo que mueve al mundo | Marítimo, aéreo, terrestre" },
       { name: "description", content: "IKROL. Más de 20 años moviendo comercio exterior mexicano por mar, aire y tierra. Despacho aduanal, carga sobredimensionada y seguros integrales." },
-      { property: "og:title", content: "IKROL — Moviendo el mundo, sin costuras" },
+      { property: "og:title", content: "IKROL — Conectamos lo que mueve al mundo" },
       { property: "og:description", content: "Logística multimodal premium desde México hacia el mundo." },
       { property: "og:image", content: heroImage },
       { property: "twitter:image", content: heroImage },
@@ -25,40 +28,122 @@ const serviceIcons: Record<string, typeof Ship> = {
   "seguro-de-mercancias": ShieldCheck,
 };
 
+function HeroCarousel() {
+  const [active, setActive] = useState(0);
+  const count = heroSlides.length;
+  const go = (dir: number) => setActive((p) => (p + dir + count) % count);
+
+  useEffect(() => {
+    const timer = setInterval(() => setActive((p) => (p + 1) % count), 6500);
+    return () => clearInterval(timer);
+  }, [count]);
+
+  return (
+    <section className="relative w-full h-[calc(100svh-5rem)] min-h-[540px] max-h-[840px] overflow-hidden bg-[#0c2340]">
+      {/* Slides */}
+      {heroSlides.map((src, idx) => (
+        <div
+          key={src}
+          className={`absolute inset-0 transition-opacity duration-[1200ms] ease-out ${idx === active ? "opacity-100" : "opacity-0"}`}
+          aria-hidden={idx !== active}
+        >
+          <img src={src} alt="" className="h-full w-full object-cover" />
+        </div>
+      ))}
+
+      {/* Legibility overlays */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#08182e] via-[#08182e]/70 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#08182e]/85 via-transparent to-[#08182e]/25" />
+
+      {/* Content */}
+      <div className="container-page relative z-10 flex h-full flex-col justify-center">
+        <div className="max-w-2xl animate-fade-up">
+          <h1 className="font-sans font-extrabold text-white text-[2.9rem] leading-[0.95] tracking-[-0.02em] sm:text-6xl md:text-7xl">
+            Conectamos<br />
+            lo que <span className="text-[#22c55e]">mueve</span><br />
+            al mundo<span className="text-[#22c55e]">.</span>
+          </h1>
+          <p className="mt-7 max-w-md text-base md:text-lg font-light text-white/80 leading-relaxed">
+            Soluciones logísticas integrales por mar, aire y tierra. Eficiencia, innovación y sostenibilidad en cada entrega.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            <Link to="/servicios" className="btn-green">
+              Nuestros servicios <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link to="/contacto" className="btn-outline-hero">
+              Cotiza tu envío <ReceiptText className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Arrows */}
+      <button
+        onClick={() => go(-1)}
+        aria-label="Slide anterior"
+        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/55"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={() => go(1)}
+        aria-label="Slide siguiente"
+        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur-sm ring-1 ring-white/20 transition hover:bg-black/55"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-7 left-0 right-0 z-20 flex justify-center gap-2.5">
+        {heroSlides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActive(idx)}
+            aria-label={`Ir al slide ${idx + 1}`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${idx === active ? "w-8 bg-[#22c55e]" : "w-4 bg-white/40 hover:bg-white/70"}`}
+          />
+        ))}
+      </div>
+
+      {/* Sustainability badge */}
+      <div className="hidden md:block absolute bottom-7 right-6 z-20 max-w-[15rem] rounded-2xl border border-white/15 bg-[#08182e]/70 p-5 backdrop-blur-md">
+        <Leaf className="h-5 w-5 text-[#22c55e]" strokeWidth={1.6} />
+        <p className="mt-3 text-sm font-medium leading-snug text-white">
+          Comprometidos con un futuro más <span className="text-[#22c55e]">sostenible</span>.
+        </p>
+        <Link to="/nosotros" className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-white/70 transition hover:text-white">
+          Conoce nuestras iniciativas <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 function HomePage() {
   const [maritimo, aereo, terrestre, sobredim, aduanal, seguros] = services;
 
   return (
     <>
-      {/* ─────────── HERO BENTO ─────────── */}
-      <section className="container-page pt-10 md:pt-16 pb-6">
+      {/* ─────────── HERO ─────────── */}
+      <HeroCarousel />
+
+      {/* ─────────── SOLUCIONES ─────────── */}
+      <section className="container-page section-py">
+        <div className="flex items-end justify-between gap-8 mb-10 md:mb-14">
+          <div>
+            <span className="eyebrow">Nuestras soluciones</span>
+            <h2 className="mt-4 font-display text-4xl md:text-6xl text-white leading-[0.95]">
+              Operamos sin fronteras<br /><span className="italic text-[#5cbdb9]">para impulsar tu negocio.</span>
+            </h2>
+          </div>
+          <Link to="/servicios" className="hidden md:inline-flex btn-ghost-light">
+            Ver todos <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 auto-rows-[minmax(180px,auto)]">
 
-          {/* HERO — 8x2 */}
-          <div className="md:col-span-8 md:row-span-2 bento-tile p-8 md:p-14 flex flex-col justify-between min-h-[520px] animate-fade-up">
-            <div className="relative z-10">
-              <span className="eyebrow inline-flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#5cbdb9]" />
-                Logística Internacional · Est. México
-              </span>
-              <h1 className="mt-8 text-[3.4rem] sm:text-7xl md:text-[7.5rem] font-display leading-[0.88] tracking-tight text-white">
-                Moviendo el mundo<br />
-                <span className="italic text-[#5cbdb9]">sin costuras.</span>
-              </h1>
-            </div>
-            <div className="relative z-10 mt-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <p className="max-w-sm text-base md:text-lg font-light text-white/75 leading-relaxed">
-                Puerta de entrada mexicana para carga marítima, aérea y terrestre. Un solo aliado para toda tu cadena de suministro global.
-              </p>
-              <Link to="/contacto" className="btn-brand w-fit">
-                Solicitar cotización <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#2d8a9e] opacity-30 blur-[120px]" />
-            <div className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay" style={{ backgroundImage: `url(${heroImage})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-          </div>
-
-          {/* MARITIMO — 4x1 */}
+          {/* MARITIMO */}
           <ServiceTile
             slug={maritimo.slug}
             name={maritimo.name}
@@ -68,7 +153,7 @@ function HomePage() {
             tone="tide-soft"
           />
 
-          {/* AEREO — 4x1 */}
+          {/* AEREO */}
           <ServiceTile
             slug={aereo.slug}
             name={aereo.name}
@@ -78,36 +163,25 @@ function HomePage() {
             tone="ink"
           />
 
-          {/* SOBREDIMENSIONADA — 5 wide, image + stats */}
-          <div className="md:col-span-5 bento-tile min-h-[280px] p-8 flex flex-col justify-between text-[#0c2340]" style={{ background: "#f5f3ee" }}>
-            <div className="flex items-start justify-between">
-              <span className="meta-mono" style={{ color: "#0c2340", opacity: 0.5 }}>04 / Project Cargo</span>
-              <Link to="/servicios/$slug" params={{ slug: sobredim.slug }} className="opacity-60 hover:opacity-100 transition-opacity">
-                <ArrowUpRight className="h-5 w-5" />
-              </Link>
-            </div>
-            <h3 className="font-display text-4xl md:text-5xl leading-[0.95] italic">
-              Carga sobre-<br />dimensionada
-            </h3>
-            <div className="flex items-center gap-8">
-              <div>
-                <p className="font-display text-3xl">32</p>
-                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Estados MX</p>
+          {/* GROUND — image tile */}
+          <Link to="/servicios/$slug" params={{ slug: terrestre.slug }} className="md:col-span-4 bento-tile min-h-[280px] group relative overflow-hidden">
+            <img src={terrestreImage} alt="Transporte terrestre IKROL" className="absolute inset-0 h-full w-full object-cover grayscale opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0c2340] via-[#0c2340]/70 to-transparent" />
+            <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <span className="meta-mono">03 / Ground Fleet</span>
+                <div className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center">
+                  <Truck className="h-4 w-4 text-white" strokeWidth={1.5} />
+                </div>
               </div>
-              <div className="h-8 w-px bg-[#0c2340]/15" />
               <div>
-                <p className="font-display text-3xl">24/7</p>
-                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Monitoreo</p>
-              </div>
-              <div className="h-8 w-px bg-[#0c2340]/15" />
-              <div>
-                <p className="font-display text-3xl">20+</p>
-                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Años</p>
+                <h3 className="font-display text-3xl md:text-4xl italic text-white leading-[0.95]">Transporte terrestre</h3>
+                <p className="text-sm text-white/70 mt-2 max-w-xs">Cross-border MX · US · CA con seguimiento GPS 24/7 en los 32 estados.</p>
               </div>
             </div>
-          </div>
+          </Link>
 
-          {/* SEGUROS / ADUANAL — 4 wide brand */}
+          {/* ADUANAL — brand tile */}
           <Link to="/servicios/$slug" params={{ slug: aduanal.slug }} className="md:col-span-4 bento-tile p-8 min-h-[280px] flex flex-col justify-between text-[#0c2340] group" style={{ background: "#5cbdb9", borderColor: "transparent" }}>
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-[0.22em] font-semibold">Cobertura Total</p>
@@ -125,35 +199,37 @@ function HomePage() {
             </div>
           </Link>
 
-          {/* IKROL BRAND MARK — 3 wide */}
-          <div className="md:col-span-3 bento-tile p-8 min-h-[240px] flex flex-col items-center justify-center text-center">
-            <Anchor className="h-6 w-6 text-[#5cbdb9] mb-3" strokeWidth={1.2} />
-            <div className="font-display text-5xl italic tracking-tighter text-white">IKROL</div>
-            <div className="meta-mono mt-2">Logistics Group</div>
-            <div className="hairline my-5" />
-            <p className="text-xs font-light italic text-white/50">Creando conexiones globales</p>
-          </div>
-
-          {/* GROUND — 5 wide with image */}
-          <Link to="/servicios/$slug" params={{ slug: terrestre.slug }} className="md:col-span-5 bento-tile min-h-[240px] group relative overflow-hidden">
-            <img src={terrestreImage} alt="Transporte terrestre IKROL" className="absolute inset-0 h-full w-full object-cover grayscale opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0c2340] via-[#0c2340]/70 to-transparent" />
-            <div className="relative z-10 p-8 h-full flex flex-col justify-between">
-              <div className="flex items-center justify-between">
-                <span className="meta-mono">03 / Ground Fleet</span>
-                <div className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center">
-                  <Truck className="h-4 w-4 text-white" strokeWidth={1.5} />
-                </div>
-              </div>
+          {/* SOBREDIMENSIONADA — stats tile */}
+          <div className="md:col-span-4 bento-tile min-h-[280px] p-8 flex flex-col justify-between text-[#0c2340]" style={{ background: "#f5f3ee" }}>
+            <div className="flex items-start justify-between">
+              <span className="meta-mono" style={{ color: "#0c2340", opacity: 0.5 }}>04 / Project Cargo</span>
+              <Link to="/servicios/$slug" params={{ slug: sobredim.slug }} className="opacity-60 hover:opacity-100 transition-opacity">
+                <ArrowUpRight className="h-5 w-5" />
+              </Link>
+            </div>
+            <h3 className="font-display text-4xl md:text-5xl leading-[0.95] italic">
+              Carga sobre-<br />dimensionada
+            </h3>
+            <div className="flex items-center gap-6">
               <div>
-                <h3 className="font-display text-4xl italic text-white leading-[0.95]">Transporte terrestre</h3>
-                <p className="text-sm text-white/70 mt-2 max-w-xs">Cross-border MX · US · CA con seguimiento GPS 24/7 en los 32 estados.</p>
+                <p className="font-display text-3xl">32</p>
+                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Estados MX</p>
+              </div>
+              <div className="h-8 w-px bg-[#0c2340]/15" />
+              <div>
+                <p className="font-display text-3xl">24/7</p>
+                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Monitoreo</p>
+              </div>
+              <div className="h-8 w-px bg-[#0c2340]/15" />
+              <div>
+                <p className="font-display text-3xl">20+</p>
+                <p className="text-[10px] uppercase tracking-widest font-semibold opacity-60 mt-1">Años</p>
               </div>
             </div>
-          </Link>
+          </div>
 
-          {/* SEGUROS small */}
-          <Link to="/servicios/$slug" params={{ slug: seguros.slug }} className="md:col-span-4 bento-tile p-8 min-h-[240px] flex flex-col justify-between group hover:bg-[rgba(45,138,158,0.25)]">
+          {/* SEGUROS */}
+          <Link to="/servicios/$slug" params={{ slug: seguros.slug }} className="md:col-span-8 bento-tile p-8 min-h-[280px] flex flex-col justify-between group hover:bg-[rgba(45,138,158,0.25)]">
             <div className="flex justify-between items-start">
               <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center">
                 <ShieldCheck className="h-4 w-4 text-[#5cbdb9]" strokeWidth={1.5} />
@@ -161,8 +237,8 @@ function HomePage() {
               <span className="meta-mono">06</span>
             </div>
             <div>
-              <h3 className="font-display text-3xl italic text-white group-hover:text-[#5cbdb9] transition-colors">Seguro de mercancías</h3>
-              <p className="text-sm text-white/60 mt-2">Pólizas ICC A · B · C con aseguradoras de primer nivel.</p>
+              <h3 className="font-display text-3xl md:text-4xl italic text-white group-hover:text-[#5cbdb9] transition-colors">Seguro de mercancías</h3>
+              <p className="text-sm text-white/60 mt-2 max-w-md">Pólizas ICC A · B · C con aseguradoras de primer nivel para proteger tu carga en cualquier modalidad.</p>
             </div>
           </Link>
 

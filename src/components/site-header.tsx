@@ -26,9 +26,13 @@ export function SiteHeader() {
       }`}
     >
       <div className="container-page flex h-20 items-center justify-between gap-6">
-        <Link to="/" className="flex items-baseline gap-2 shrink-0">
-          <span className="font-display text-3xl italic tracking-tighter text-white">IKROL</span>
-          <span className="hidden sm:inline meta-mono">MX</span>
+        <Link to="/" className="flex items-center shrink-0" aria-label="IKROL — Inicio">
+          <img
+            src="/logo.png"
+            alt="IKROL"
+            className="h-8 md:h-9 w-auto"
+            style={{ filter: "brightness(0) invert(1)" }}
+          />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">

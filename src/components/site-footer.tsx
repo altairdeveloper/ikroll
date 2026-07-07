@@ -11,9 +11,12 @@ export function SiteFooter() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div>
               <span className="meta-mono">Est. 2004 · Ciudad de México</span>
-              <h2 className="mt-4 font-display italic text-white leading-[0.85] tracking-tighter text-[5rem] sm:text-[8rem] md:text-[12rem]">
-                IKROL.
-              </h2>
+              <img
+                src="/logo.png"
+                alt="IKROL"
+                className="mt-6 h-20 md:h-28 w-auto"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
             </div>
             <Link to="/contacto" className="btn-brand shrink-0 mb-4">
               Escribir a un asesor <ArrowUpRight className="h-4 w-4" />
