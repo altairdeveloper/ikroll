@@ -65,7 +65,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "IKROL — Creando conexiones globales | Logística y Comercio Exterior" },
-      { name: "description", content: "IKROL: más de 20 años ofreciendo soluciones integrales de logística internacional, transporte marítimo, aéreo, terrestre, despacho aduanal y comercio exterior en México." },
+      { name: "description", content: "IKROL: más de 20 años ofreciendo soluciones integrales de logística internacional, transporte marítimo, aéreo, terrestre, agenciamiento aduanal y comercio exterior en México." },
       { name: "author", content: "IKROL" },
       { property: "og:title", content: "IKROL — Creando conexiones globales" },
       { property: "og:description", content: "Soluciones integrales de logística multimodal e internacional. Conectamos lo que mueve al mundo." },

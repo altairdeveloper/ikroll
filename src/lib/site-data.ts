@@ -30,23 +30,29 @@ export const heroImage = "/hero.png";
 export const maritimoImage = "/ship.png";
 export const aereoImage = "/flight.png";
 export const terrestreImage = "/truck.png";
-export const sobredimensionadaImage = "/carriage.png";
+export const carriageImage = "/carriage.png";
+// Branded promotional graphics provided by the client (shown in full color).
+export const cargaImage = "/carga-dimensionada.jpg";
+export const aduanalImage = "/agenciamiento-aduanal.jpg";
+export const seguroImage = "/seguro-mercancias.jpg";
+export const transportarFacilImage = "/transportar-facil.jpg";
+export const contactoFondoImage = "/contacto-fondo.jpg";
 
 export const services: Service[] = [
   {
     slug: "flete-maritimo",
-    name: "Flete Marítimo",
+    name: "Transporte Marítimo",
     short: "Cobertura mundial en carga FCL, LCL y proyectos especiales.",
     icon: Ship,
     hero: maritimoImage,
     intro:
       "Movemos tu carga por los principales puertos del mundo con tarifas competitivas, tiempos de tránsito confiables y trazabilidad total.",
     features: [
-      "Contenedor completo (FCL) 20', 40', 40'HC y 45'",
+      "Contenedor completo (FCL) 20', 40' y 40'HC",
       "Carga consolidada (LCL) puerto a puerto y puerta a puerta",
       "Carga refrigerada (reefer) y mercancías peligrosas (IMO)",
-      "Contratos anuales con navieras de primer nivel",
-      "Cobertura en Manzanillo, Lázaro Cárdenas, Veracruz, Altamira y Mazatlán",
+      "Trabajamos con las mejores navieras a nivel mundial.",
+      "Cobertura en Manzanillo, Lázaro Cárdenas, Veracruz y Altamira",
     ],
     benefits: [
       { title: "Cobertura global", description: "Rutas directas y de trasbordo a Asia, Europa, Norteamérica y Sudamérica." },
@@ -56,17 +62,17 @@ export const services: Service[] = [
   },
   {
     slug: "flete-aereo",
-    name: "Flete Aéreo",
+    name: "Transporte Aéreo",
     short: "Soluciones aéreas para carga urgente, perecedera y de alto valor.",
     icon: Plane,
     hero: aereoImage,
     intro:
       "Cuando el tiempo es crítico, garantizamos rapidez, seguridad y visibilidad en cada envío aéreo internacional o doméstico.",
     features: [
-      "Servicio aéreo directo, consolidado y charter",
-      "Carga general, perecedera, farmacéutica y valores",
-      "Manejo de mercancías peligrosas (DGR)",
-      "Recolección puerta a puerta y entrega express",
+      "Servicio aéreo directo y charter",
+      "Carga general, perecedera y farmacéutica",
+      "Manejo de mercancías peligrosas (DIMO)",
+      "Recolección puerta a puerta",
       "Alianzas con las principales aerolíneas cargueras",
     ],
     benefits: [
@@ -82,13 +88,16 @@ export const services: Service[] = [
     icon: Truck,
     hero: terrestreImage,
     intro:
-      "Red propia y aliada de unidades para movimientos nacionales, fronterizos y de distribución con seguimiento GPS 24/7.",
+      "Unidades aliadas para movimientos nacionales y fronterizos con seguimiento GPS 24/7.",
     features: [
-      "Full, sencillo, caja seca, refrigerada y plataforma",
+      "Caja seca de 48 pies",
+      "Caja seca de 53 pies",
+      "Caja refrigerada",
+      "Plataforma",
       "Servicio cross-border México — Estados Unidos y Canadá",
       "Rutas dedicadas y consolidadas por ciudad",
       "Unidades con GPS, monitoreo y custodia",
-      "Cobertura en los 32 estados de la República",
+      "Cobertura nacional",
     ],
     benefits: [
       { title: "Seguimiento en tiempo real", description: "Visibilidad de la unidad y estatus del embarque en todo momento." },
@@ -101,12 +110,11 @@ export const services: Service[] = [
     name: "Carga Sobredimensionada",
     short: "Proyectos especiales, maquinaria y carga fuera de norma.",
     icon: Package,
-    hero: sobredimensionadaImage,
+    hero: cargaImage,
     intro:
       "Diseñamos soluciones a la medida para maquinaria pesada, equipos industriales y carga con dimensiones fuera de estándar.",
     features: [
-      "Estudios de ruta y permisos especiales",
-      "Grúas, lowboys, modulares y equipo hidráulico",
+      "Grúas, lowboys y equipo hidráulico",
       "Embarques Break Bulk, RO-RO y Flat Rack",
       "Escoltas y logística en sitio",
       "Ingeniería de estiba y trincado certificada",
@@ -119,17 +127,15 @@ export const services: Service[] = [
   },
   {
     slug: "despacho-aduanal",
-    name: "Despacho Aduanal",
+    name: "Agenciamiento Aduanal",
     short: "Asesoría y trámite integral en importación y exportación.",
     icon: FileCheck2,
-    hero: aereoImage,
+    hero: aduanalImage,
     intro:
       "Trabajamos con agentes aduanales certificados en las principales aduanas del país para agilizar tus operaciones de comercio exterior.",
     features: [
       "Clasificación arancelaria y prevalidación",
       "Importación definitiva, temporal e IMMEX",
-      "Gestión ante COFEPRIS, SENASICA, SEDENA y SE",
-      "Programas de fomento: PROSEC, Regla 8ª, Cuenta Aduanera",
       "Presencia en puertos, fronteras y aeropuertos",
     ],
     benefits: [
@@ -143,12 +149,15 @@ export const services: Service[] = [
     name: "Seguro de Mercancías",
     short: "Cobertura integral para tu carga en cualquier modalidad.",
     icon: ShieldCheck,
-    hero: terrestreImage,
+    hero: seguroImage,
     intro:
       "Protege el valor de tus mercancías durante todo el trayecto con pólizas específicas por embarque o anuales.",
     features: [
-      "Pólizas específicas o de flotilla",
-      "Cobertura ICC A, B y C conforme a normas internacionales",
+      "Protección ante pérdidas o daños durante el transporte.",
+      "Cobertura nacional e internacional para tus envíos.",
+      "Respaldo financiero frente a imprevistos.",
+      "Mayor tranquilidad al saber que tu mercancía está protegida.",
+      "Cobertura contra robo, accidentes y siniestros, según la póliza contratada.",
       "Coberturas de guerra, huelga y almacenaje",
       "Asesoría para reclamaciones y salvamento",
       "Trámite ágil ante aseguradoras de primer nivel",
@@ -178,9 +187,9 @@ export const highlights = [
 ];
 
 export const coverage = {
-  puertos: ["Manzanillo", "Lázaro Cárdenas", "Veracruz", "Mazatlán", "Altamira"],
-  fronteras: ["Tijuana", "Laredo", "Ciudad Juárez", "Nogales"],
-  aeropuertos: ["Ciudad de México", "Guadalajara", "Monterrey", "Querétaro"],
+  puertos: ["Manzanillo", "Lázaro Cárdenas", "Veracruz", "Altamira"],
+  fronteras: ["Tijuana", "Laredo"],
+  aeropuertos: ["Ciudad de México", "Guadalajara", "Monterrey", "Toluca"],
 };
 
 export const contactInfo = {

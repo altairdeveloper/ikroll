@@ -1,16 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { ArrowRight, ArrowUpRight, Ship, Plane, Truck, Package, FileCheck2, ShieldCheck, ChevronLeft, ChevronRight, Leaf, ReceiptText } from "lucide-react";
-import { services, heroImage, maritimoImage, aereoImage, terrestreImage, sobredimensionadaImage, contactInfo, coverage } from "@/lib/site-data";
+import { services, heroImage, maritimoImage, aereoImage, terrestreImage, carriageImage, transportarFacilImage, contactInfo } from "@/lib/site-data";
 
-const heroSlides = [heroImage, maritimoImage, aereoImage, terrestreImage, sobredimensionadaImage];
+const heroSlides = [heroImage, maritimoImage, aereoImage, terrestreImage, carriageImage];
 
 export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
       { title: "IKROL — Conectamos lo que mueve al mundo | Marítimo, aéreo, terrestre" },
-      { name: "description", content: "IKROL. Más de 20 años moviendo comercio exterior mexicano por mar, aire y tierra. Despacho aduanal, carga sobredimensionada y seguros integrales." },
+      { name: "description", content: "IKROL. Más de 20 años moviendo comercio exterior mexicano por mar, aire y tierra. Agenciamiento aduanal, carga sobredimensionada y seguros integrales." },
       { property: "og:title", content: "IKROL — Conectamos lo que mueve al mundo" },
       { property: "og:description", content: "Logística multimodal premium desde México hacia el mundo." },
       { property: "og:image", content: heroImage },
@@ -59,9 +59,9 @@ function HeroCarousel() {
       <div className="container-page relative z-10 flex h-full flex-col justify-center">
         <div className="max-w-2xl animate-fade-up">
           <h1 className="font-sans font-extrabold text-white text-[2.9rem] leading-[0.95] tracking-[-0.02em] sm:text-6xl md:text-7xl">
-            Conectamos<br />
-            lo que <span className="text-[#22c55e]">mueve</span><br />
-            al mundo<span className="text-[#22c55e]">.</span>
+            <span className="text-[#00be9a]">Conectamos</span><br />
+            lo que <span className="text-[#00be9a]">mueve</span><br />
+            al mundo<span className="text-[#00be9a]">.</span>
           </h1>
           <p className="mt-7 max-w-md text-base md:text-lg font-light text-white/80 leading-relaxed">
             Soluciones logísticas integrales por mar, aire y tierra. Eficiencia, innovación y sostenibilidad en cada entrega.
@@ -100,16 +100,16 @@ function HeroCarousel() {
             key={idx}
             onClick={() => setActive(idx)}
             aria-label={`Ir al slide ${idx + 1}`}
-            className={`h-1.5 rounded-full transition-all duration-300 ${idx === active ? "w-8 bg-[#22c55e]" : "w-4 bg-white/40 hover:bg-white/70"}`}
+            className={`h-1.5 rounded-full transition-all duration-300 ${idx === active ? "w-8 bg-[#00be9a]" : "w-4 bg-white/40 hover:bg-white/70"}`}
           />
         ))}
       </div>
 
       {/* Sustainability badge */}
       <div className="hidden md:block absolute bottom-7 right-6 z-20 max-w-[15rem] rounded-2xl border border-white/15 bg-[#08182e]/70 p-5 backdrop-blur-md">
-        <Leaf className="h-5 w-5 text-[#22c55e]" strokeWidth={1.6} />
+        <Leaf className="h-5 w-5 text-[#00be9a]" strokeWidth={1.6} />
         <p className="mt-3 text-sm font-medium leading-snug text-white">
-          Comprometidos con un futuro más <span className="text-[#22c55e]">sostenible</span>.
+          Comprometidos con un futuro más <span className="text-[#00be9a]">sostenible</span>.
         </p>
         <Link to="/nosotros" className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-white/70 transition hover:text-white">
           Conoce nuestras iniciativas <ArrowRight className="h-3.5 w-3.5" />
@@ -125,58 +125,15 @@ function HomePage() {
       {/* ─────────── HERO ─────────── */}
       <HeroCarousel />
 
-      {/* ─────────── PORT / TRUST STRIP ─────────── */}
-      <section className="border-y border-white/5 py-8 overflow-hidden">
-        <div className="container-page flex items-center gap-6 mb-6">
-          <span className="meta-mono shrink-0">Corredores activos</span>
-          <div className="hairline" />
-        </div>
-        <div className="flex gap-12 overflow-hidden [mask-image:linear-gradient(90deg,transparent,white_10%,white_90%,transparent)]">
-          <div className="flex gap-12 shrink-0 animate-marquee whitespace-nowrap">
-            {[...coverage.puertos, ...coverage.fronteras, ...coverage.aeropuertos, ...coverage.puertos, ...coverage.fronteras, ...coverage.aeropuertos].map((p, i) => (
-              <span key={i} className="font-display text-3xl italic text-white/40 hover:text-white/80 transition-colors">
-                {p} <span className="text-[#5cbdb9] not-italic mx-3">·</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────── SPLIT MANIFESTO ─────────── */}
+      {/* ─────────── TRANSPORTAR NUNCA FUE TAN FÁCIL ─────────── */}
       <section className="section-py container-page">
-        <div className="grid md:grid-cols-12 gap-10 md:gap-16">
-          <div className="md:col-span-4">
-            <span className="eyebrow">Quiénes somos</span>
-            <div className="hairline mt-4 mb-8" />
-            <p className="meta-mono">Est. 2004 · México</p>
-            <p className="meta-mono mt-2">6 líneas de servicio</p>
-            <p className="meta-mono mt-2">Presencia multimodal</p>
-          </div>
-          <div className="md:col-span-8">
-            <h2 className="font-display text-5xl md:text-7xl leading-[0.95] text-white">
-              Somos operadores logísticos. <span className="italic text-[#5cbdb9]">No intermediarios.</span>
-            </h2>
-            <p className="mt-10 text-lg text-white/70 max-w-2xl leading-relaxed font-light">
-              IKROL es una empresa mexicana con más de dos décadas moviendo comercio exterior. Diseñamos, coordinamos y ejecutamos cada tramo del embarque —desde la cotización hasta la entrega final— con un ejecutivo dedicado y trazabilidad total.
-            </p>
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { n: "20+", l: "Años operando" },
-                { n: "140+", l: "Países cubiertos" },
-                { n: "32", l: "Estados MX" },
-                { n: "100%", l: "Trazabilidad" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div className="font-display text-5xl md:text-6xl text-white">{s.n}</div>
-                  <div className="meta-mono mt-2">{s.l}</div>
-                </div>
-              ))}
-            </div>
-            <Link to="/nosotros" className="mt-12 inline-flex items-center gap-3 text-white group">
-              <span className="font-display italic text-2xl">Conocer la firma</span>
-              <ArrowUpRight className="h-5 w-5 text-[#5cbdb9] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-            </Link>
-          </div>
+        <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-white/10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]">
+          <img
+            src={transportarFacilImage}
+            alt="Transportar nunca fue tan fácil — Cobertura crossborder, seguridad y confianza, entregas a tiempo y optimización de costos con IKROL."
+            className="block w-full h-auto"
+            loading="lazy"
+          />
         </div>
       </section>
 
@@ -186,8 +143,8 @@ function HomePage() {
           <div className="flex items-end justify-between gap-8 mb-14">
             <div>
               <span className="eyebrow">Índice de servicios</span>
-              <h2 className="mt-4 font-display text-5xl md:text-7xl text-white leading-[0.95]">
-                Seis líneas.<br /><span className="italic">Una operación.</span>
+              <h2 className="mt-4 font-display text-4xl md:text-6xl text-white leading-[0.95] max-w-3xl">
+                Soluciones para mover tu carga <span className="italic text-[#00be9a]">por cualquier medio.</span>
               </h2>
             </div>
             <Link to="/servicios" className="hidden md:inline-flex btn-ghost-light">
@@ -219,28 +176,6 @@ function HomePage() {
                 </Link>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────── EDITORIAL IMAGES ─────────── */}
-      <section className="section-py container-page">
-        <div className="grid md:grid-cols-12 gap-4 md:gap-5 auto-rows-[minmax(220px,auto)]">
-          <div className="md:col-span-7 md:row-span-2 bento-tile min-h-[520px] overflow-hidden group">
-            <img src={maritimoImage} alt="Operación marítima IKROL" className="h-full w-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
-          </div>
-          <div className="md:col-span-5 bento-tile p-8 flex flex-col justify-between min-h-[250px]">
-            <span className="meta-mono">Fig. 01 — Puerto</span>
-            <p className="font-display text-3xl md:text-4xl italic text-white leading-tight">
-              "Cargamos hoy. Entregamos confianza. Movemos negocios, impulsamos el futuro."
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="hairline flex-1" />
-              <span className="meta-mono">IKROL</span>
-            </div>
-          </div>
-          <div className="md:col-span-5 bento-tile overflow-hidden min-h-[250px] group">
-            <img src={aereoImage} alt="Operación aérea IKROL" className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" />
           </div>
         </div>
       </section>

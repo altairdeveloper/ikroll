@@ -15,10 +15,6 @@ export const Route = createFileRoute("/cobertura")({
   }),
 });
 
-const estados = [
-  "Aguascalientes","Baja California","Baja California Sur","Campeche","Chiapas","Chihuahua","Ciudad de México","Coahuila","Colima","Durango","Guanajuato","Guerrero","Hidalgo","Jalisco","México","Michoacán","Morelos","Nayarit","Nuevo León","Oaxaca","Puebla","Querétaro","Quintana Roo","San Luis Potosí","Sinaloa","Sonora","Tabasco","Tamaulipas","Tlaxcala","Veracruz","Yucatán","Zacatecas",
-];
-
 function Coverage() {
   const blocks = [
     { icon: Anchor, tag: "01", title: "Puertos", items: coverage.puertos },
@@ -60,18 +56,15 @@ function Coverage() {
           <div className="flex items-baseline justify-between flex-wrap gap-4">
             <div>
               <span className="eyebrow">Terrestre</span>
-              <h3 className="mt-3 font-display text-4xl md:text-5xl text-white italic">32 estados de la República.</h3>
+              <h3 className="mt-3 font-display text-4xl md:text-5xl italic text-[#00be9a]">Cobertura nacional.</h3>
             </div>
             <span className="meta-mono">Servicio nacional</span>
           </div>
           <div className="hairline mt-8 mb-8" />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-3">
-            {estados.map((e) => (
-              <div key={e} className="text-sm text-white/70 font-light border-b border-white/5 pb-2 hover:text-[#5cbdb9] transition-colors">
-                {e}
-              </div>
-            ))}
-          </div>
+          <p className="max-w-3xl text-lg text-white/70 font-light leading-relaxed">
+            Operamos rutas terrestres en todo el país, conectando puertos, fronteras y aeropuertos con los
+            principales centros de producción y consumo de México.
+          </p>
         </div>
       </section>
     </>

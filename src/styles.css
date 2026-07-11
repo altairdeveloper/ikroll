@@ -160,11 +160,11 @@
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: -0.01em;
-  background: #16a34a;
-  color: #ffffff;
+  background: #00be9a;
+  color: #052e26;
   transition: transform 0.25s ease, background 0.25s ease;
   &:hover {
-    background: #15803d;
+    background: #00a888;
     transform: translateY(-1px);
   }
 }

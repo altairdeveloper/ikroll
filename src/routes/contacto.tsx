@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { Mail, MapPin, Phone, Send, MessageCircle, CheckCircle2 } from "lucide-react";
-import { contactInfo, services } from "@/lib/site-data";
+import { contactInfo, services, contactoFondoImage } from "@/lib/site-data";
 import { PageHero } from "./servicios.index";
 
 export const Route = createFileRoute("/contacto")({
@@ -24,6 +24,8 @@ const schema = z.object({
   empresa: z.string().trim().max(120).optional().or(z.literal("")),
   telefono: z.string().trim().max(30).optional().or(z.literal("")),
   servicio: z.string().trim().max(100).optional().or(z.literal("")),
+  peso: z.string().trim().max(60).optional().or(z.literal("")),
+  medidas: z.string().trim().max(120).optional().or(z.literal("")),
   mensaje: z.string().trim().min(10, "Cuéntanos un poco más").max(1500),
 });
 
@@ -44,7 +46,7 @@ function Contact() {
     }
     setErrors({});
     // Compose WhatsApp fallback link
-    const msg = `Hola IKROL, soy ${result.data.nombre} ${result.data.apellido} (${result.data.email}).\nServicio: ${result.data.servicio || "General"}\n\n${result.data.mensaje}`;
+    const msg = `Hola IKROL, soy ${result.data.nombre} ${result.data.apellido} (${result.data.email}).\nServicio: ${result.data.servicio || "General"}\nPeso: ${result.data.peso || "N/D"}\nMedidas: ${result.data.medidas || "N/D"}\n\n${result.data.mensaje}`;
     window.open(`https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
     setSent(true);
     (e.target as HTMLFormElement).reset();
@@ -58,7 +60,10 @@ function Contact() {
         subtitle="Cuéntanos qué mueves. Un especialista de IKROL responderá con una propuesta técnica en menos de 24 horas."
       />
 
-      <section className="section-py container-page">
+      <section className="relative overflow-hidden section-py">
+        <img src={contactoFondoImage} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-[0.07]" />
+        <div className="absolute inset-0 bg-[#0c2340]/88" />
+        <div className="container-page relative z-10">
         <div className="grid lg:grid-cols-12 gap-6">
           <div className="lg:col-span-5 space-y-4">
             {[
@@ -104,6 +109,10 @@ function Contact() {
                     <Field label="Teléfono" name="telefono" type="tel" error={errors.telefono} />
                   </div>
                   <Field label="Empresa" name="empresa" error={errors.empresa} />
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <Field label="Peso de la mercancía" name="peso" error={errors.peso} />
+                    <Field label="Medidas de la mercancía" name="medidas" error={errors.medidas} />
+                  </div>
                   <div>
                     <label className="meta-mono block mb-2">Servicio de interés</label>
                     <select name="servicio" className="w-full h-12 px-3 rounded-none bg-transparent border-b border-white/20 text-white focus:outline-none focus:border-[#5cbdb9] font-light">
@@ -127,6 +136,7 @@ function Contact() {
               )}
             </div>
           </div>
+        </div>
         </div>
       </section>
     </>

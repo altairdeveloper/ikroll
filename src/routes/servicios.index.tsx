@@ -7,7 +7,7 @@ export const Route = createFileRoute("/servicios/")({
   head: () => ({
     meta: [
       { title: "Servicios de logística internacional | IKROL" },
-      { name: "description", content: "Conoce los servicios de IKROL: flete marítimo, aéreo, terrestre, carga sobredimensionada, despacho aduanal y seguro de mercancías." },
+      { name: "description", content: "Conoce los servicios de IKROL: transporte marítimo, aéreo, terrestre, carga sobredimensionada, agenciamiento aduanal y seguro de mercancías." },
       { property: "og:title", content: "Servicios IKROL — Logística integral" },
       { property: "og:description", content: "Soluciones marítimas, aéreas, terrestres y de comercio exterior." },
     ],
@@ -18,9 +18,9 @@ function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Índice de servicios"
-        title={<>Seis líneas.<br /><span className="italic text-[#5cbdb9]">Una operación.</span></>}
-        subtitle="Un aliado estratégico que gestiona cada eslabón de la cadena: transporte multimodal, aduanas y aseguramiento de mercancías."
+        eyebrow="Servicios"
+        title={<>Transportamos tu carga<br /><span className="italic text-[#00be9a]">por cualquier vía.</span></>}
+        subtitle="En IKROL somos expertos en transportar tu carga por cualquier vía."
       />
 
       <section className="section-py container-page">
@@ -33,7 +33,7 @@ function ServicesPage() {
               className="bento-tile group overflow-hidden flex flex-col min-h-[420px]"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
-                <img src={s.hero} alt={s.name} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
+                <img src={s.hero} alt={s.name} className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0c2340] via-[#0c2340]/50 to-transparent" />
                 <span className="absolute top-5 left-6 meta-mono">0{i + 1}</span>
                 <div className="absolute top-4 right-4 w-10 h-10 rounded-full border border-white/25 backdrop-blur flex items-center justify-center">
@@ -62,7 +62,7 @@ export function PageHero({ eyebrow, title, subtitle, image }: { eyebrow: string;
     <section className="relative isolate overflow-hidden pt-16 md:pt-24 pb-16 md:pb-24 border-b border-white/5">
       {image && (
         <>
-          <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover grayscale opacity-30" />
+          <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0c2340]/70 via-[#0c2340]/85 to-[#0c2340]" />
         </>
       )}
