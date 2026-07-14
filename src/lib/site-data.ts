@@ -193,9 +193,9 @@ export const coverage = {
 };
 
 export const contactInfo = {
-  phone: "+52 55 0000 0000",
-  whatsapp: "525500000000",
-  email: "contacto@ikrol.mx",
+  phone: "+52 56 1202 4392",
+  whatsapp: "525612024392",
+  email: "proyectos@ikrol.mx",
   address: "Ciudad de México, México",
   website: "www.ikrol.mx",
 };
